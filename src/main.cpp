@@ -8,31 +8,40 @@
 
 int main() {
   int t, p, c;
-  //printf("Inicio!\n");
   while(scanf("%d %d %d", &t, &p, &c) != EOF) {
+
+    //Variáveis
     Planeta vetor[p];
     int meses, cursor, e, i, visitas_mes, cont;
     i= e= cursor= meses= visitas_mes= cont= 0;
 
-    for(int i=0; i<p; i++){
+    //Leitura de planetas
+    for(i=0; i<p; i++){
       //scanf("%d %s", &vetor[i].tempo, &vetor[i].nome);
       std::cin >> vetor[i].tempo >> vetor[i].nome;
     }
-    /*for(int i=0; i<p; i++){
-      //printf("%d\t", vetor[i].tempo);
-      std::cout << vetor[i].nome << " " << vetor[i].tempo << std::endl;
-    }
-    printf("Fim!\n");*/
-    mergesort(vetor, 0, p-1);
     for(int i=0; i<p; i++){
       //printf("%d\t", vetor[i].tempo);
-      meses+= vetor[i].tempo;
       //std::cout << vetor[i].nome << " " << vetor[i].tempo << std::endl;
     }
-    //printf("Fim!\n");
 
+    //Teste
+    //radixsort(vetor, p, c);
+
+    //Ordenar por tempo de maneira estável
+    mergesort(vetor, 0, p-1);
+
+    //Faz a soma total dos tempos de visitação
+    for(int i=0; i<p; i++){
+      //printf("%d\t", vetor[i].tempo);
+      //std::cout << vetor[i].nome << " " << vetor[i].tempo << std::endl;
+      meses+= vetor[i].tempo;
+    }
+
+    //Calcula a quantidade de meses necessários para todas as visitações
     meses= ceil((float) meses/t);
-    std::cout << meses << std::endl;
+    i= 0;
+    //printf("%d\n", meses);
 
     if(meses>1){
       while(cont<= meses){
@@ -49,30 +58,27 @@ int main() {
           }
           //RADIX e copiar no vetor principal
           radixsort(aux, i-e, c);
-          for(int j=e; j<i-e; j++){
-            vetor[j].mes= aux[j].mes;
-            vetor[j].nome= aux[j].nome;
-            vetor[j].tempo= aux[j].tempo;            
+          for(int j=0; j<i-e; j++){
+            vetor[j+e].mes= aux[j].mes;
+            vetor[j+e].nome= aux[j].nome;
+            vetor[j+e].tempo= aux[j].tempo;            
           }
           cont++;
-          for(int j=0; j<i-e; j++){
-            std::cout << aux[j].mes << " " << aux[j].nome << " " << aux[j].tempo << std::endl;
-          }
           e= cursor;
         }
       }
     }else{
       //joga o vetor inteiro no RADIX
       radixsort(vetor, p, c);
-      for(int i=0; i<p; i++){
+      /*for(int i=0; i<p; i++){
         //printf("%d\t", vetor[i].tempo);
         std::cout << vetor[i].mes << " " << vetor[i].nome << " " << vetor[i].tempo << std::endl;
-      }
+      }*/
     }
-    /*for(int i=0; i<p; i++){
+    for(int i=0; i<p; i++){
       //printf("%d\t", vetor[i].tempo);
       std::cout << vetor[i].mes << " " << vetor[i].nome << " " << vetor[i].tempo << std::endl;
-    }*/
+    }
 
   }
 
