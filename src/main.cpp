@@ -11,15 +11,21 @@ int main() {
   while(scanf("%d %d %d", &t, &p, &c) != EOF) {
 
     //Variáveis
-    Planeta vetor[p];
-    int meses, cursor, e, i, visitas_mes, cont;
-    i= e= cursor= meses= visitas_mes= cont= 0;
+    //Planeta vetor[p];
+    //Sentinela final
+    Planeta vetor[p+1];
+    int meses, cursor, e, i, visitas_mes, cont, soma;
+    i= e= cursor= meses= visitas_mes= cont= soma= 0;
 
     //Leitura de planetas
     for(i=0; i<p; i++){
       //scanf("%d %s", &vetor[i].tempo, &vetor[i].nome);
       std::cin >> vetor[i].tempo >> vetor[i].nome;
     }
+
+    //Sentinela
+    vetor[p].tempo= 0;
+
     for(int i=0; i<p; i++){
       //printf("%d\t", vetor[i].tempo);
       //std::cout << vetor[i].nome << " " << vetor[i].tempo << std::endl;
@@ -36,20 +42,26 @@ int main() {
       //printf("%d\t", vetor[i].tempo);
       //std::cout << vetor[i].nome << " " << vetor[i].tempo << std::endl;
       meses+= vetor[i].tempo;
+      if((meses+ vetor[i+1].tempo)>t || i+1==p){
+        soma++;
+        meses= 0;
+      }
     }
+    //printf("Soma: %d\n", soma);
 
     //Calcula a quantidade de meses necessários para todas as visitações
-    meses= ceil((float) meses/t);
+    //meses= ceil((float) meses/t);
     i= 0;
     //printf("%d\n", meses);
+    visitas_mes= vetor[i].tempo;
 
-    if(meses>1){
-      while(cont<= meses){
-        if(((visitas_mes+ vetor[i].tempo)<= t) && (i<p)){
-          visitas_mes+= vetor[i].tempo;
+    if(soma>1){
+      while(cont< soma){
+        if((i<p) && ((visitas_mes)<= t)){
           i++;
+          visitas_mes+= vetor[i].tempo;
         }else{
-          visitas_mes= 0;
+          visitas_mes= vetor[i].tempo;
           Planeta *aux= new Planeta[i-e];
           for(int j=0; j<i-e; j++){
             aux[j]= vetor[cursor];
