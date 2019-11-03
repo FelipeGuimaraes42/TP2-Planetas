@@ -5,7 +5,7 @@
 
 struct Planeta{
     int tempo;
-    int mes;
+    int mes= 1;
     std::string nome;
 };
 
