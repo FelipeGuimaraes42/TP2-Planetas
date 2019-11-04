@@ -12,51 +12,36 @@ int main() {
 
     //Variáveis
     //Planeta vetor[p];
-    //Sentinela final
+    //Sentinela na posição final
     Planeta vetor[p+1];
-    int meses, cursor, e, i, visitas_mes, cont, soma;
+    int meses, cursor, e, i, visitas_mes, cont, soma, j;
     i= e= cursor= meses= visitas_mes= cont= soma= 0;
 
     //Leitura de planetas
-    for(i=0; i<p; i++){
-      //scanf("%d %s", &vetor[i].tempo, &vetor[i].nome);
-      std::cin >> vetor[i].tempo >> vetor[i].nome;
+    for(j=0; j<p; j++){
+      std::cin >> vetor[j].tempo >> vetor[j].nome;
     }
-
     //Sentinela
     vetor[p].tempo= 0;
-
-    for(int i=0; i<p; i++){
-      //printf("%d\t", vetor[i].tempo);
-      //std::cout << vetor[i].nome << " " << vetor[i].tempo << std::endl;
-    }
-
-    //Teste
-    //radixsort(vetor, p, c);
 
     //Ordenar por tempo de maneira estável
     mergesort(vetor, 0, p-1);
 
-    //Faz a soma total dos tempos de visitação
-    for(int i=0; i<p; i++){
-      //printf("%d\t", vetor[i].tempo);
-      //std::cout << vetor[i].nome << " " << vetor[i].tempo << std::endl;
-      meses+= vetor[i].tempo;
-      if((meses+ vetor[i+1].tempo)>t || i+1==p){
-        soma++;
-        meses= 0;
+    //Faz o cálculo total dos meses de visitação
+    for(j=0; j<p; j++){
+      soma+= vetor[j].tempo;
+      if((soma+ vetor[j+1].tempo)>t || j+1==p){
+        meses++;
+        soma= 0;
       }
     }
-    //printf("Soma: %d\n", soma);
 
-    //Calcula a quantidade de meses necessários para todas as visitações
-    //meses= ceil((float) meses/t);
-    i= 0;
-    //printf("%d\n", meses);
+    //O valor da variável começa com a visitação de menor tempo
     visitas_mes= vetor[i].tempo;
 
-    if(soma>1){
-      while(cont< soma){
+    //Separa em subvetores de acordo com o valor máximo especificado em t
+    if(meses>1){
+      while(cont< meses){
         if((i<p) && ((visitas_mes)<= t)){
           i++;
           visitas_mes+= vetor[i].tempo;
@@ -65,31 +50,26 @@ int main() {
           Planeta *aux= new Planeta[i-e];
           for(int j=0; j<i-e; j++){
             aux[j]= vetor[cursor];
-            aux[j].mes= cont+1;
             cursor++;
           }
           //RADIX e copiar no vetor principal
           radixsort(aux, i-e, c);
           for(int j=0; j<i-e; j++){
-            vetor[j+e].mes= aux[j].mes;
-            vetor[j+e].nome= aux[j].nome;
-            vetor[j+e].tempo= aux[j].tempo;            
+            vetor[j+e]= aux[j];
+            vetor[j+e].mes= cont+1;       
           }
           cont++;
           e= cursor;
         }
       }
+
     }else{
       //joga o vetor inteiro no RADIX
       radixsort(vetor, p, c);
-      /*for(int i=0; i<p; i++){
-        //printf("%d\t", vetor[i].tempo);
-        std::cout << vetor[i].mes << " " << vetor[i].nome << " " << vetor[i].tempo << std::endl;
-      }*/
     }
-    for(int i=0; i<p; i++){
-      //printf("%d\t", vetor[i].tempo);
-      std::cout << vetor[i].mes << " " << vetor[i].nome << " " << vetor[i].tempo << std::endl;
+    //Printa mês, nome e tempo de todos os planetas visitados
+    for(j=0; j<p; j++){
+      std::cout << vetor[j].mes << " " << vetor[j].nome << " " << vetor[j].tempo << std::endl;
     }
 
   }
