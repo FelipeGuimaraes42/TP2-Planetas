@@ -2,7 +2,7 @@
 
 void merge(Planeta *a, int e, int m, int d){
     int h, i, j, k;
-    Planeta *aux= new Planeta[d+1-e];
+    Planeta *aux= new Planeta[d-e+1];
     h= e;
     i= 0;
     j= m+1;

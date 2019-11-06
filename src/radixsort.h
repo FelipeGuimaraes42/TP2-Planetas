@@ -3,7 +3,7 @@
 
 #include "planeta.h"
 
-void countingsort(Planeta *, int, int, int);
+void countingsort(Planeta *, int, int);
 void radixsort(Planeta *, int, int);
 
 #endif
