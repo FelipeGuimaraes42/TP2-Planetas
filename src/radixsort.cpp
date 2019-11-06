@@ -1,26 +1,29 @@
 #include "radixsort.h"
 
+#define LETRAS 26
+#define INICIO_ASCII 97
+
 void countingsort(Planeta *a, int tam, int k){
     Planeta *b= NULL;
     int *c= NULL;
     b = new Planeta[tam];
-    c= new int[27];
+    c= new int[LETRAS];
 
-    for(int i=0; i<27; i++){
+    for(int i=0; i<LETRAS; i++){
         c[i]= 0;
     }
 
     for(int j=0; j<tam; j++){
-        c[(int)(a[j].nome[k]- 96)]++;
+        c[(int)(a[j].nome[k]- INICIO_ASCII)]++;
     }
 
-    for(int f=1; f<27; f++){
+    for(int f=1; f<LETRAS; f++){
         c[f]+= c[f-1];
     }
 
     for(int r=tam-1; r>=0; r--){
-        b[c[(int)(a[r].nome[k]- 96)]- 1]= a[r];
-        c[(int)(a[r].nome[k]- 96)]--;
+        b[c[(int)(a[r].nome[k]- INICIO_ASCII)]- 1]= a[r];
+        c[(int)(a[r].nome[k]- INICIO_ASCII)]--;
     }
 
     for(int l=0; l<tam; l++){

@@ -11,8 +11,6 @@ int main() {
   while(scanf("%d %d %d", &t, &p, &c) != EOF) {
 
     //Variáveis
-    //Planeta vetor[p];
-    //Sentinela na posição final
     Planeta vetor[p+1];
     int meses, cursor, e, i, visitas_mes, cont, soma, j;
     i= e= cursor= meses= visitas_mes= cont= soma= 0;
@@ -21,7 +19,7 @@ int main() {
     for(j=0; j<p; j++){
       std::cin >> vetor[j].tempo >> vetor[j].nome;
     }
-    //Sentinela
+    //Sentinela na posição final
     vetor[p].tempo= 0;
 
     //Ordenar por tempo de maneira estável
@@ -52,12 +50,14 @@ int main() {
             aux[j]= vetor[cursor];
             cursor++;
           }
-          //RADIX e copiar no vetor principal
+          //Ordena alfabeticamente
           radixsort(aux, i-e, c);
+          //Copia os valores ordenados no vetor principal
           for(int j=0; j<i-e; j++){
             vetor[j+e]= aux[j];
             vetor[j+e].mes= cont+1;       
           }
+          delete[] aux;
           cont++;
           e= cursor;
         }
