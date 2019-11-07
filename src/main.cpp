@@ -2,9 +2,9 @@
 #include <iostream>
 #include <cmath>
 
-#include "planeta.h"
-#include "mergesort.h"
-#include "radixsort.h"
+#include "include/planeta.h"
+#include "include/mergesort.h"
+#include "include/radixsort.h"
 
 int main() {
   int t, p, c;

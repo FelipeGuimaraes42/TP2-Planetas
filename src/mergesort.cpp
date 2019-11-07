@@ -1,4 +1,4 @@
-#include "mergesort.h"
+#include "include/mergesort.h"
 
 void merge(Planeta *a, int e, int m, int d){
     int h, i, j, k;
