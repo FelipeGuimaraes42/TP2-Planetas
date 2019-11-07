@@ -1,3 +1,0 @@
-http://www.codecodex.com/wiki/Merge_sort#C.2B.2B acesso em 31/10/2019 às 23:01;
-
-g++ main.cpp planeta.cpp mergesort.cpp -o main
