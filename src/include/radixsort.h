@@ -5,5 +5,6 @@
 
 void countingsort(Planeta *, int, int);
 void radixsort(Planeta *, int, int);
+void radix_mes(Planeta *, int, int, int);
 
 #endif
