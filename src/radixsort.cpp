@@ -1,7 +1,7 @@
 #include "include/radixsort.h"
 
-#define LETRAS 26
-#define INICIO_ASCII 97
+#define LETRAS 26 //Número de letras no alfabeto
+#define INICIO_ASCII 97 //Valor da letra a na tabela ASCII
 
 void countingsort(Planeta *a, int tam, int k){
     Planeta *b= new Planeta[tam];
